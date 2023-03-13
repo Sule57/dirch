@@ -1,9 +1,9 @@
 # Dirch by Sule57
 
-## Triggers
+### Triggers
 
-* **-u | --url** - Specify the target URL
-* **-w | --wordlist** - Specify the Wordlist to use (by default common.txt)
+**-u | --url** - Specify the target URL
+**-w | --wordlist** - Specify the Wordlist to use (by default common.txt)
 
 ## How to use
 
