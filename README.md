@@ -1,5 +1,12 @@
 # Dirch by Sule57
 
+Dirch is a simple python script that will take the provided (or not) wordlist and test if a directory named the same as any of the words in the words inside the provided wordlist exists on the provided website.
+
+The usage is designed to be quite simple (plug and play).
+No unnecessary libraries used that require you to install stuff, just clone the repository and run the script as described below.
+
+The project was created to remember python and to have a tool that I can make how I like it, but please if you have any ideas for implementations, don't hesitate.
+
 ### Triggers
 
 * **-u | --url** - Specify the target URL
