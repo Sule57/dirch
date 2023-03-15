@@ -45,6 +45,7 @@ except requests.exceptions.MissingSchema:
 # Sends a request to each subdirectory in the wordlist, if status codes are 200, 301, 303, 403, 405, 408, 412, 451, 500, 508, 511, print out the url
 # If at any point the user presses ctrl + C exit the program
 def send_request():
+    codes = [200, 301, 303, 403, 405, 408, 412, 451, 500, 508, 511]
     try:
         with open(wordlist) as f:
             for line in f:
@@ -56,7 +57,7 @@ def send_request():
 
                 full_url = f"{url}/{word}"
                 response = requests.get(full_url)
-                if response.status_code == 200 or response.status_code == 301 or response.status_code == 303 or response.status_code == 403 or response.status_code == 405 or response.status_code == 408 or response.status_code == 412 or response.status_code == 451 or response.status_code == 500 or response.status_code == 508 or response.status_code == 511:
+                if response.status_code in codes:
                     print(f"[Info] Found: {full_url}" + "  |  " + str(response.status_code) + "  |  " + response.reason + "  |")
                     
     except KeyboardInterrupt:
