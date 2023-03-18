@@ -11,6 +11,7 @@ The project was created to remember python and to have a tool that I can make ho
 
 * **-u | --url** - Specify the target URL
 * **-w | --wordlist** - Specify the Wordlist to use (by default common.txt)
+* **-d | --delay** - Specify the delay between requests
 
 ## How to use
 

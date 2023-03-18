@@ -1,6 +1,7 @@
 # Dirch (Directory Search) is a simple python tool for discovering directories on a website
 # Created by github.com/sule57
 
+import time
 import requests
 import argparse
 import sys
@@ -16,6 +17,7 @@ print("-------------------------------------------------------------")
 parser = argparse.ArgumentParser(description="A simple directory checker")
 parser.add_argument("-u", "--url", help="The url to check", required=True)
 parser.add_argument("-w", "--wordlist", help="The wordlist to use", required=False)
+parser.add_argument("-d", "--delay", help="Add delay between requests", required=False)
 # TODO: Custom headers
 args = parser.parse_args()
 
@@ -42,6 +44,22 @@ except requests.exceptions.MissingSchema:
     print("[Error] The url is not valid please use formatting like https://example.com")
     sys.exit()
 
+# If the user passes a delay, use it, if not use 0
+if args.delay:
+    delay = args.delay
+else:
+    delay = 0
+
+# Check if the value passed is a number, if not print out an error message saying
+# "The delay must be a number"
+try:
+    delay = int(delay)
+    print("[Info] Delay between requests: " + str(delay) + "ms")
+    print()
+except ValueError:
+    print("[Error] The delay must be a number")
+    sys.exit()
+
 # Sends a request to each subdirectory in the wordlist, if status codes are 200, 301, 303, 403, 405, 408, 412, 451, 500, 508, 511, print out the url
 # If at any point the user presses ctrl + C exit the program
 def send_request():
@@ -59,22 +77,15 @@ def send_request():
                 response = requests.get(full_url)
                 if response.status_code in codes:
                     print(f"[Info] Found: {full_url}" + "  |  " + str(response.status_code) + "  |  " + response.reason + "  |")
+                
+                # If the user passes a delay, wait that amount of miliseconds before sending the next request
+                if delay != 0:
+                    time.sleep(delay / 1000)
                     
     except KeyboardInterrupt:
         print()
         print("Exiting...")
         sys.exit()
-
-
-
-
-
-
-
-
-send_request()
-
-# If the user presses ctrl + C exit the program without writing out anything else
 
 send_request()
 print()
